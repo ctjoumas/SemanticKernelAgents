@@ -30,7 +30,7 @@
             /*** This uses a single thread to show how agents can collaborate - no need for a coordinator here ***/
             var carManualAgent = await new AgentBuilder()
                 .WithAzureOpenAIChatCompletion(AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_MODEL, AZURE_OPENAI_KEY)
-                .WithInstructions(@$"You are a car agent which returns information from the user manual to the user based on their request. You will also count the number of vowels or consanants, but you must ask the user which they want to count, vowels or consanants and prompt this with VOWELS OR CONSANANTS?.")
+                .WithInstructions(@$"You are a car agent which returns information from the user manual to the user based on their request. You will also count the number of vowels or consanants, but you must ask the user which they want to count, vowels or consanants and prompt this with VOWELS OR CONSONANTS?.")
                 .WithPlugins(GetPlugins())
                 .WithName("Car Manual Agent")
                 .WithDescription("Search the Azure Search index for information from a car manual based on a user question and counts either or both consanants and vowels in the respons.")
@@ -67,7 +67,7 @@
                 // Initiate car manual agent input
                 var agentMessages = await thread.InvokeAsync(carManualAgent).ToArrayAsync();
                 DisplayMessages(agentMessages, carManualAgent);
-                if (agentMessages.First().Content.Contains("VOWELS OR CONSANANTS?", StringComparison.OrdinalIgnoreCase))
+                if (agentMessages.First().Content.Contains("VOWELS OR CONSONANTS?", StringComparison.OrdinalIgnoreCase))
                 {
                     // if more information is requested, the customer service agent should prompt the user
                     string additionalInput = Console.ReadLine();
