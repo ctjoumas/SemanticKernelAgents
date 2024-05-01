@@ -7,6 +7,8 @@
     using SemanticKernelAgents.Tools;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -29,9 +31,7 @@
             var carManualAgent = await new AgentBuilder()
                 .WithAzureOpenAIChatCompletion(AZURE_OPENAI_ENDPOINT, AZURE_OPENAI_MODEL, AZURE_OPENAI_KEY)
                 .WithInstructions(@$"You are a car agent which returns information from the user manual to the user based on their request. You will also count the number of vowels or consanants, but you must ask the user which they want to count, vowels or consanants and prompt this with VOWELS OR CONSANANTS?.")
-                .WithPlugin(KernelPluginFactory.CreateFromType<AISearchPlugin>())
-                .WithPlugin(KernelPluginFactory.CreateFromType<ConsanantCounterPlugin>())
-                .WithPlugin(KernelPluginFactory.CreateFromType<VowelCounterPlugin>())
+                .WithPlugins(GetPlugins())
                 .WithName("Car Manual Agent")
                 .WithDescription("Search the Azure Search index for information from a car manual based on a user question and counts either or both consanants and vowels in the respons.")
                 .BuildAsync();
@@ -108,6 +108,13 @@
             }
             while (!isComplete || retries == 3);
             /*** End single thread model ***/
+        }
+
+        public static IEnumerable<KernelPlugin> GetPlugins()
+        {
+            yield return KernelPluginFactory.CreateFromType<AISearchPlugin>();
+            yield return KernelPluginFactory.CreateFromType<ConsanantCounterPlugin>();
+            yield return KernelPluginFactory.CreateFromType<VowelCounterPlugin>();
         }
 
         private void DisplayMessages(IEnumerable<IChatMessage> messages, IAgent? agent = null)
