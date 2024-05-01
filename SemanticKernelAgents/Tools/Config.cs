@@ -1,0 +1,43 @@
+﻿namespace SemanticKernelAgents.Tools
+{
+    using Microsoft.Extensions.Configuration;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Configuration for the demo based on environment:
+    ///     OPENAI_KEY - The OpenAI API key
+    ///     OPENAI_MODEL - The target transformer model (defaults to gpt-4-1106-preview)
+    /// 
+    /// Only OPENAI_KEY is required.
+    /// </summary>
+    internal class Config
+    {
+        private static IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("local.settings.json").Build();
+    
+        /// <summary>
+        /// Required OpenAI API key.
+        /// </summary>
+        public static string AzureOpenAiKey =>
+            configuration["AZURE_OPENAI_KEY"] ??
+            throw new InvalidOperationException("'AZURE_OPENAI_KEY' undefined.");
+
+        /// <summary>
+        /// The model name (defaults to gpt-4-1106-preview).
+        /// </summary>
+        public static string AzureOpenAiEndpoint =>
+            configuration["AZURE_OPENAI_ENDPOINT"] ??
+            throw new InvalidOperationException("'AZURE_OPENAI_ENDPOINT' undefined.");
+
+        /// <summary>
+        /// The model name (defaults to gpt-4-1106-preview).
+        /// </summary>
+        public static string ModelName =>
+            configuration["AZURE_OPENAI_MODEL"] ??
+            throw new InvalidOperationException("'AZURE_OPENAI_MODEL' undefined.");
+    }
+}
