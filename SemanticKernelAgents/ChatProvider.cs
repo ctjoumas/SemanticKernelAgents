@@ -106,7 +106,7 @@
 
                 retries++;
             }
-            while (!isComplete || retries == 3);
+            while (!isComplete && retries < 3);
             /*** End single thread model ***/
         }
 
