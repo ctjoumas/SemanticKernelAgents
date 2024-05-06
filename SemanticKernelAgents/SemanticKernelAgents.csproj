@@ -6,16 +6,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <!-- Suppress: "Declare types in namespaces", "Require ConfigureAwait", "Experimental" -->
-    <NoWarn>CS8618,IDE0009,CA1051,CA1050,CA1707,CA2007,VSTHRD111,CS1591,RCS1110,CA5394,SKEXP0001,SKEXP0010,SKEXP0020,SKEXP0040,SKEXP0050,SKEXP0060,SKEXP0070,SKEXP0101</NoWarn>
+    <NoWarn>CS8618,IDE0009,CA1051,CA1050,CA1707,CA2007,VSTHRD111,CS1591,RCS1110,CA5394,SKEXP0001,SKEXP0010,SKEXP0020,SKEXP0040,SKEXP0050,SKEXP0060,SKEXP0070,SKEXP0101,SKEXP0110</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.AI.OpenAI" Version="1.0.0-beta.17" />
     <PackageReference Include="Azure.Search.Documents" Version="11.5.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0-preview.2.24128.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0-preview.2.24128.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0-preview.2.24128.5" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.7.1" />
-    <PackageReference Include="Microsoft.SemanticKernel.Experimental.Agents" Version="1.7.1-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.10.0" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Abstractions" Version="1.10.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.Core" Version="1.10.0-alpha" />
+    <PackageReference Include="Microsoft.SemanticKernel.Agents.OpenAI" Version="1.10.0-alpha" />
   </ItemGroup>
 
   <ItemGroup>

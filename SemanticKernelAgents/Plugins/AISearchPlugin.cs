@@ -2,7 +2,6 @@
 {
     using Azure.AI.OpenAI;
     using Azure;
-    using HandlebarsDotNet.Extensions;
     using Microsoft.Extensions.Logging;
     using Microsoft.SemanticKernel;
     using System;
@@ -36,7 +35,7 @@
         {
             StringBuilder content = new StringBuilder();
 
-            Console.WriteLine("Searching Manuals Index...");
+            Console.WriteLine("Searching Manuals Index...\n");
 
             List<UserManualDetails> userManualDetailsList = await SemanticHybridSearch(query, logger);
 
