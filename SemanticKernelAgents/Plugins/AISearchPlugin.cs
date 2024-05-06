@@ -14,18 +14,19 @@
     using Azure.Search.Documents.Indexes;
     using Azure.Search.Documents;
     using Azure.Search.Documents.Models;
+    using SemanticKernelAgents.Tools;
 
     internal class AISearchPlugin
     {
-        private string SemanticSearchConfigName = "vector-1708954728462-semantic-configuration"; //Environment.GetEnvironmentVariable("SemanticSearchConfigName");
-        private string ServiceEndpoint = "https://ais-documents.search.windows.net"; //Environment.GetEnvironmentVariable("ServiceEndpoint");
-        //private string OpenAiApiKey = "d5284eed48db4cb29d4f60b517f269ec"; //Environment.GetEnvironmentVariable("OpenAiApiKey");
-        //private string OpenAiEndpoint = "https://aoaisemantickernel.openai.azure.com/"; //Environment.GetEnvironmentVariable("OpenAiEndpoint");
-        private string OpenAiApiKey = "ed582f01e7c04abb986ce653e57b39d5"; //Environment.GetEnvironmentVariable("OpenAiApiKey");
-        private string OpenAiEndpoint = "https://aoai-ncu-semantickernel.openai.azure.com/"; //Environment.GetEnvironmentVariable("OpenAiEndpoint");
-        private string SearchServiceKey = "XIlL07pLNkFI59TfP75aJubSMreurZmWvFpFXOz0npAzSeAs9LJ2"; //Environment.GetEnvironmentVariable("SearchServiceKey");
-        private string IndexName = "vector-1708954728462";
-        private string MODEL_DEPLOYMENT_NAME = "text-embedding-ada-002"; //Environment.GetEnvironmentVariable("ModelDeployment");
+        private string AZURE_OPENAI_ENDPOINT = Config.AzureOpenAiEndpoint;
+        private string AZURE_OPENAI_KEY = Config.AzureOpenAiKey;
+        private string AZURE_OPENAI_MODEL = Config.ModelName;
+
+        private string SemanticSearchConfigName = Config.SearchConfigName;
+        private string ServiceEndpoint = Config.SearchServiceEndpoint;
+        private string SearchServiceKey = Config.SearchServiceKey;
+        private string IndexName = Config.SearchIndexName;
+        private string MODEL_DEPLOYMENT_NAME = "text-embedding-ada-002";
 
         [KernelFunction, Description("Searches the Azure Search index for information about the Tesla based on the Tesla user manual.")]
         public async Task<string> SearchManualsIndex(
@@ -59,8 +60,8 @@
         public async Task<List<UserManualDetails>> SemanticHybridSearch(string query, ILogger logger)
         {
             // Initialize OpenAI client      
-            var credential = new AzureKeyCredential(OpenAiApiKey);
-            var openAIClient = new OpenAIClient(new Uri(OpenAiEndpoint), credential);
+            var credential = new AzureKeyCredential(AZURE_OPENAI_KEY);
+            var openAIClient = new OpenAIClient(new Uri(AZURE_OPENAI_ENDPOINT), credential);
 
             // Initialize Azure Cognitive Search clients      
             var searchCredential = new AzureKeyCredential(SearchServiceKey);

@@ -39,5 +39,35 @@
         public static string ModelName =>
             configuration["AZURE_OPENAI_MODEL"] ??
             throw new InvalidOperationException("'AZURE_OPENAI_MODEL' undefined.");
+
+        /// <summary>
+        /// The search service key
+        /// </summary>
+        public static string SearchServiceKey =>
+            configuration["Search_Service_Key"] ??
+            throw new InvalidOperationException("'Search_Service_Key' undefined.");
+
+        /// <summary>
+        /// The search index name
+        /// </summary>
+        public static string SearchIndexName =>
+            configuration["Search_Index_Name"] ??
+            throw new InvalidOperationException("'Search_Index_Name' undefined.");
+
+        /// <summary>
+        /// The search index name
+        /// </summary>
+        public static string SearchConfigName =>
+            configuration["Search_Config_Name"] ??
+            throw new InvalidOperationException("'Search_Configx_Name' undefined.");
+
+        /// <summary>
+        /// The search index name
+        /// </summary>
+        public static string SearchServiceEndpoint =>
+            configuration["Search_Service_Endpoint"] ??
+            throw new InvalidOperationException("'Search_Service_Endpoint' undefined.");
+
+        
     }
 }
